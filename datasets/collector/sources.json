@@ -1,0 +1,110 @@
+[
+  {
+    "id": "hf-flat-24k",
+    "type": "synthetic-images-with-ground-truth",
+    "url": "https://huggingface.co/datasets/cloverx-id/indonesian-id-card-dummy",
+    "size_reported": "24000 images",
+    "license_reported": "CC BY 4.0 (reported)",
+    "access": "hf --config flat --limit 0",
+    "notes": "Images with synthetic labels; check the dataset card before redistribution."
+  },
+  {
+    "id": "hf-augmented-108804",
+    "type": "synthetic-and-negative-samples",
+    "url": "https://huggingface.co/datasets/cloverx-id/indonesian-id-card-dummy",
+    "size_reported": "108804 samples",
+    "license_reported": "CC BY 4.0 (reported)",
+    "access": "hf --config augmented --limit 0 --ack-authorization",
+    "notes": "Publisher warns about residual sensitive third-party data in hard negatives."
+  },
+  {
+    "id": "github-ektp-generator",
+    "type": "synthetic-generator-with-example",
+    "url": "https://github.com/veldanava/EKTP-Generator",
+    "size_reported": "generator with example",
+    "license_reported": "MIT",
+    "access": "github --group synthetic",
+    "notes": "Review portrait/template provenance before reuse."
+  },
+  {
+    "id": "github-yoshcasaster-generator",
+    "type": "synthetic-generator",
+    "url": "https://github.com/YoshCasaster/e-ktp-generator",
+    "size_reported": "generator code",
+    "license_reported": "MIT",
+    "access": "github --group synthetic",
+    "notes": "Generator code, not an image dataset."
+  },
+  {
+    "id": "github-khazulys-fake",
+    "type": "synthetic-generator",
+    "url": "https://github.com/khazulys/Fake_ektp",
+    "size_reported": "generator code",
+    "license_reported": "GPL-3.0",
+    "access": "github --group synthetic",
+    "notes": "Follow GPL terms when redistributing."
+  },
+  {
+    "id": "github-fathurp-synthetic-pipeline",
+    "type": "synthetic-generator-review",
+    "url": "https://github.com/fathurp01/Fake-EKTP-Generator-With-Local-LLM-GAN-For-Data-Generator",
+    "size_reported": "pipeline for 100 synthetic images",
+    "license_reported": "MIT stated in README",
+    "access": "github --group review --ack-authorization",
+    "notes": "Input KTP templates may depict personal information; generated outputs not committed."
+  },
+  {
+    "id": "github-bukalapak-sample",
+    "type": "example-may-contain-personal-data",
+    "url": "https://github.com/bukalapak/KTPextractor",
+    "size_reported": "1 sample KTP and OCR CSV",
+    "license_reported": "not verified",
+    "access": "github --group review --ack-authorization",
+    "notes": "Publicly accessible does not imply subject permission."
+  },
+  {
+    "id": "github-taqiin-samples",
+    "type": "examples-may-contain-personal-data",
+    "url": "https://github.com/taqiin/OCR-KTP-ID",
+    "size_reported": "example images including FAKE-KTP.jpg",
+    "license_reported": "Artistic License 2.0 for repository",
+    "access": "github --group review --ack-authorization",
+    "notes": "Other example images could contain personal data."
+  },
+  {
+    "id": "roboflow-ktp-scanner",
+    "type": "object-detection-may-contain-personal-data",
+    "url": "https://universe.roboflow.com/outer-space/ktp-scanner-uhtxs",
+    "size_reported": "40 images (reported)",
+    "license_reported": "CC BY 4.0 (reported)",
+    "access": "roboflow --ack-authorization",
+    "notes": "Requires API key and permission verification."
+  },
+  {
+    "id": "roboflow-deteksi-ktp",
+    "type": "object-detection-may-contain-personal-data",
+    "url": "https://universe.roboflow.com/ocr-ktp-indoneisa/deteksi-ktp-indonesia",
+    "size_reported": "129 images (reported)",
+    "license_reported": "CC BY 4.0 (reported)",
+    "access": "roboflow --ack-authorization",
+    "notes": "Requires API key and permission verification."
+  },
+  {
+    "id": "roboflow-ktp-ocr-ceel",
+    "type": "object-detection-may-contain-personal-data",
+    "url": "https://universe.roboflow.com/ceel/ktp-ocr-bjfs7",
+    "size_reported": "1670 images (reported)",
+    "license_reported": "CC BY 4.0 (reported)",
+    "access": "roboflow --ack-authorization",
+    "notes": "Includes photo/signature classes; review privacy."
+  },
+  {
+    "id": "jeecs-78-anonymized-real-ktp",
+    "type": "real-photographs-anonymized-in-research",
+    "url": "https://ejournal.ubhara.ac.id/index.php/jeecs/article/view/1595",
+    "size_reported": "78 images",
+    "license_reported": "permission not published",
+    "access": "contact authors directly",
+    "notes": "Dataset not publicly downloadable; do not assume redistribution rights."
+  }
+]
