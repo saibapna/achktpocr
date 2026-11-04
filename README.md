@@ -49,3 +49,7 @@ YOLO field detection and comparisons with Tesseract/PaddleOCR are future extensi
 Read docs/docker-deployment.md for operations and security.
 
 **License:** project license not yet selected; separately inspect third-party OCR model and dataset licenses before redistribution.
+
+## Benchmark RapidOCR vs Tesseract model KTP
+
+The separate CPU-only benchmark compares RapidOCR and Tesseract with `ktp.traineddata` on identical synthetic or private, authorized held-out images. The custom Tesseract model is **not** included in production images and must pass model licensing/provenance review. See [benchmark instructions](docs/ocr-benchmark.md). Do not enable fallback or preprocessing without validated improvements on held-out KTPs.

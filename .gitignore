@@ -34,3 +34,9 @@ models/**/*.safetensors
 .idea/
 .vscode/
 datasets/collector/data/**
+
+# OCR benchmark private binary/data and metrics
+/models/benchmark/
+/reports/
+/benchmarks/private/
+*.traineddata

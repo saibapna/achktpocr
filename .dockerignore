@@ -9,3 +9,9 @@ __pycache__
 datasets
 models/**/*.pt
 models/**/*.onnx
+
+# Keep private OCR benchmark datasets/models out of Docker image context
+models/benchmark/
+reports/
+benchmarks/private/
+*.traineddata
