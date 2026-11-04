@@ -57,3 +57,7 @@ The separate CPU-only benchmark compares RapidOCR and Tesseract with `ktp.traine
 ## Experimental photo deskew benchmark
 
 The **opt-in benchmark-only** `deskew` transform estimates horizontal text skew (up to ±24°) and applies a rotation only when row alignment improves sufficiently. On 24 **fictional synthetic cards** with local Tesseract `ind`, NIK exact-match increased from 12/24 to 21/24, with no regressions on clear fixtures. It **did not** fix perspective distortion. The transform adds CPU cost, and this is **not evidence** of RapidOCR or real-KTP accuracy; no production API processing is changed. See [evaluation and acceptance gates](docs/deskew-evaluation.md).
+
+## From collected synthetic dataset to reproducible benchmark
+
+The optional collector produces a different ground-truth schema from the OCR benchmark runner. The new bridge generates **private**, identity-grouped development and holdout manifests from the reviewed synthetic `flat` split, optionally with blurred, rotated and perspective-distorted holdout images. No dataset files or labels are committed, and no production OCR model is changed. Read [collector-to-benchmark instructions](docs/collector-benchmark-bridge.md).
