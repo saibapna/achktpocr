@@ -9,12 +9,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /srv/app
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends tesseract-ocr fonts-dejavu-core libgomp1 ca-certificates \
+    && apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-ind fonts-dejavu-core libgomp1 ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 COPY pyproject.toml README.md ./
 COPY app ./app
 COPY scripts ./scripts
-RUN python -m pip install --no-cache-dir '.[ocr]' \
+RUN python -m pip install --no-cache-dir '.[ocr]' 'opencv-python-headless>=4.10,<5' \
     && python -c 'import rapidocr, onnxruntime; print("Benchmark OCR installed")'
 
 RUN groupadd --system bench && useradd --system --gid bench --create-home bench

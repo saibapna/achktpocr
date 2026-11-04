@@ -1,0 +1,89 @@
+{
+  "conditions": [
+    {
+      "condition": "blur_medium",
+      "deskew_nik_exact": 3,
+      "raw_nik_exact": 3,
+      "samples": 3
+    },
+    {
+      "condition": "blur_mild",
+      "deskew_nik_exact": 3,
+      "raw_nik_exact": 3,
+      "samples": 3
+    },
+    {
+      "condition": "clear",
+      "deskew_nik_exact": 3,
+      "raw_nik_exact": 3,
+      "samples": 3
+    },
+    {
+      "condition": "combined",
+      "deskew_nik_exact": 3,
+      "raw_nik_exact": 0,
+      "samples": 3
+    },
+    {
+      "condition": "low_light",
+      "deskew_nik_exact": 3,
+      "raw_nik_exact": 3,
+      "samples": 3
+    },
+    {
+      "condition": "perspective",
+      "deskew_nik_exact": 0,
+      "raw_nik_exact": 0,
+      "samples": 3
+    },
+    {
+      "condition": "rotate_12",
+      "deskew_nik_exact": 3,
+      "raw_nik_exact": 0,
+      "samples": 3
+    },
+    {
+      "condition": "rotate_minus_18",
+      "deskew_nik_exact": 3,
+      "raw_nik_exact": 0,
+      "samples": 3
+    }
+  ],
+  "engine": "tesseract-ind",
+  "independent_groups": 3,
+  "notes": [
+    "No original images, ground truth identifiers, OCR text or filesystem paths in this report.",
+    "Latency is from a single local CPU machine; decoding the uploaded image is excluded.",
+    "All input images are fictional typographic test cards, not representative of real KTPs."
+  ],
+  "overall": {
+    "deskew": {
+      "inference_p95_ms": 377.4,
+      "inference_plus_variant_p95_ms": 705.96,
+      "nik_exact": 21,
+      "nik_exact_rate": 0.875,
+      "nik_samples": 24,
+      "variant_preprocess_p95_ms": 310.19
+    },
+    "raw": {
+      "inference_p95_ms": 347.29,
+      "inference_plus_variant_p95_ms": 347.29,
+      "nik_exact": 12,
+      "nik_exact_rate": 0.5,
+      "nik_samples": 24,
+      "variant_preprocess_p95_ms": 0.0
+    }
+  },
+  "paired_nik": {
+    "baseline_only": 0,
+    "both_correct": 12,
+    "both_wrong": 3,
+    "candidate_only": 9
+  },
+  "sample_count": 24,
+  "schema_version": 1,
+  "scope": "DIAGNOSTIC_SYNTHETIC_ONLY_NO_REAL_KTP_NOT_RAPIDOCR_NOT_KTP_TRAINEDDATA",
+  "status": "NOT_PRODUCTION_ELIGIBLE",
+  "tessdata_sha256": "69786901da87ab8766c1ea7fbb10b28f2110c14da3f6c8f2735df131fba95d88",
+  "tesseract_version": "5.5.0"
+}
