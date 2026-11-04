@@ -1,0 +1,1439 @@
+{
+  "dataset_kind": "synthetic_30_fictional_typographic_not_real_ktp",
+  "engines": {
+    "tesseract-ind": {
+      "model_sha256": "69786901da87ab8766c1ea7fbb10b28f2110c14da3f6c8f2735df131fba95d88"
+    }
+  },
+  "environment": {
+    "onnxruntime_version": null,
+    "platform": "Linux",
+    "python": "3.13.5",
+    "rapidocr_version": null
+  },
+  "independent_groups": 3,
+  "overall": [
+    {
+      "cases": 30,
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.4,
+          "exact_count": 18,
+          "exact_rate": 0.6,
+          "read_rate": 0.6,
+          "samples": 30
+        },
+        "nama": {
+          "cer": 0.8103,
+          "exact_count": 18,
+          "exact_rate": 0.6,
+          "read_rate": 0.9,
+          "samples": 30
+        },
+        "nik": {
+          "cer": 0.3688,
+          "exact_count": 18,
+          "exact_rate": 0.6,
+          "read_rate": 0.6333,
+          "samples": 30
+        },
+        "tanggal_lahir": {
+          "cer": 0.5,
+          "exact_count": 15,
+          "exact_rate": 0.5,
+          "read_rate": 0.5,
+          "samples": 30
+        },
+        "tempat_lahir": {
+          "cer": 0.5,
+          "exact_count": 15,
+          "exact_rate": 0.5,
+          "read_rate": 0.5,
+          "samples": 30
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 323.84,
+        "p95": 455.49
+      },
+      "latency_ms": {
+        "p50": 285.04,
+        "p95": 352.77
+      },
+      "preprocess": "perspective",
+      "statuses": {
+        "ktp": 24,
+        "unknown": 6
+      },
+      "variant_preprocessing_ms": {
+        "p50": 40.12,
+        "p95": 126.14
+      }
+    },
+    {
+      "cases": 30,
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.6,
+          "exact_count": 12,
+          "exact_rate": 0.4,
+          "read_rate": 0.4,
+          "samples": 30
+        },
+        "nama": {
+          "cer": 0.8128,
+          "exact_count": 17,
+          "exact_rate": 0.5667,
+          "read_rate": 0.9,
+          "samples": 30
+        },
+        "nik": {
+          "cer": 0.4667,
+          "exact_count": 12,
+          "exact_rate": 0.4,
+          "read_rate": 0.5667,
+          "samples": 30
+        },
+        "tanggal_lahir": {
+          "cer": 0.7,
+          "exact_count": 9,
+          "exact_rate": 0.3,
+          "read_rate": 0.3,
+          "samples": 30
+        },
+        "tempat_lahir": {
+          "cer": 0.7,
+          "exact_count": 9,
+          "exact_rate": 0.3,
+          "read_rate": 0.3,
+          "samples": 30
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 290.94,
+        "p95": 341.04
+      },
+      "latency_ms": {
+        "p50": 290.93,
+        "p95": 341.04
+      },
+      "preprocess": "raw",
+      "statuses": {
+        "ktp": 24,
+        "unknown": 6
+      },
+      "variant_preprocessing_ms": {
+        "p50": 0.0,
+        "p95": 0.0
+      }
+    }
+  ],
+  "paired_nik_engines": [],
+  "paired_nik_variants": [
+    {
+      "baseline": "raw",
+      "baseline_only": 0,
+      "both_correct": 12,
+      "both_wrong": 12,
+      "candidate": "perspective",
+      "candidate_only": 6,
+      "condition": "all",
+      "engine": "tesseract-ind"
+    },
+    {
+      "baseline": "raw",
+      "baseline_only": 0,
+      "both_correct": 3,
+      "both_wrong": 0,
+      "candidate": "perspective",
+      "candidate_only": 0,
+      "condition": "blur_medium",
+      "engine": "tesseract-ind"
+    },
+    {
+      "baseline": "raw",
+      "baseline_only": 0,
+      "both_correct": 3,
+      "both_wrong": 0,
+      "candidate": "perspective",
+      "candidate_only": 0,
+      "condition": "blur_mild",
+      "engine": "tesseract-ind"
+    },
+    {
+      "baseline": "raw",
+      "baseline_only": 0,
+      "both_correct": 3,
+      "both_wrong": 0,
+      "candidate": "perspective",
+      "candidate_only": 0,
+      "condition": "clear",
+      "engine": "tesseract-ind"
+    },
+    {
+      "baseline": "raw",
+      "baseline_only": 0,
+      "both_correct": 0,
+      "both_wrong": 3,
+      "candidate": "perspective",
+      "candidate_only": 0,
+      "condition": "combined",
+      "engine": "tesseract-ind"
+    },
+    {
+      "baseline": "raw",
+      "baseline_only": 0,
+      "both_correct": 3,
+      "both_wrong": 0,
+      "candidate": "perspective",
+      "candidate_only": 0,
+      "condition": "low_light",
+      "engine": "tesseract-ind"
+    },
+    {
+      "baseline": "raw",
+      "baseline_only": 0,
+      "both_correct": 0,
+      "both_wrong": 3,
+      "candidate": "perspective",
+      "candidate_only": 0,
+      "condition": "perspective",
+      "engine": "tesseract-ind"
+    },
+    {
+      "baseline": "raw",
+      "baseline_only": 0,
+      "both_correct": 0,
+      "both_wrong": 0,
+      "candidate": "perspective",
+      "candidate_only": 3,
+      "condition": "photo_perspective",
+      "engine": "tesseract-ind"
+    },
+    {
+      "baseline": "raw",
+      "baseline_only": 0,
+      "both_correct": 0,
+      "both_wrong": 0,
+      "candidate": "perspective",
+      "candidate_only": 3,
+      "condition": "photo_perspective_blur",
+      "engine": "tesseract-ind"
+    },
+    {
+      "baseline": "raw",
+      "baseline_only": 0,
+      "both_correct": 0,
+      "both_wrong": 3,
+      "candidate": "perspective",
+      "candidate_only": 0,
+      "condition": "rotate_12",
+      "engine": "tesseract-ind"
+    },
+    {
+      "baseline": "raw",
+      "baseline_only": 0,
+      "both_correct": 0,
+      "both_wrong": 3,
+      "candidate": "perspective",
+      "candidate_only": 0,
+      "condition": "rotate_minus_18",
+      "engine": "tesseract-ind"
+    }
+  ],
+  "privacy": "Only aggregate metrics; no source paths, raw OCR text, NIK or ground truth serialized.",
+  "promotion_eligible": false,
+  "reason": "Candidate needs a sufficiently sized, authorized real held-out dataset, manual approval, and a license/provenance review before any deployment.",
+  "sample_count": 30,
+  "schema_version": 1,
+  "summary": [
+    {
+      "cases": 3,
+      "condition": "blur_medium",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 274.56,
+        "p95": 293.77
+      },
+      "latency_ms": {
+        "p50": 246.9,
+        "p95": 255.17
+      },
+      "preprocess": "perspective",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 30.23,
+        "p95": 38.85
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "blur_mild",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 311.65,
+        "p95": 317.27
+      },
+      "latency_ms": {
+        "p50": 282.09,
+        "p95": 292.46
+      },
+      "preprocess": "perspective",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 28.96,
+        "p95": 29.5
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "clear",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 293.49,
+        "p95": 374.2
+      },
+      "latency_ms": {
+        "p50": 268.38,
+        "p95": 349.96
+      },
+      "preprocess": "perspective",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 24.51,
+        "p95": 25.05
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "combined",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 2.7436,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.6875,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.3333,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 335.03,
+        "p95": 594.91
+      },
+      "latency_ms": {
+        "p50": 291.44,
+        "p95": 545.4
+      },
+      "preprocess": "perspective",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 46.12,
+        "p95": 49.77
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "low_light",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 301.36,
+        "p95": 317.15
+      },
+      "latency_ms": {
+        "p50": 277.79,
+        "p95": 285.85
+      },
+      "preprocess": "perspective",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 31.12,
+        "p95": 32.06
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "perspective",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 318.89,
+        "p95": 352.72
+      },
+      "latency_ms": {
+        "p50": 281.93,
+        "p95": 321.96
+      },
+      "preprocess": "perspective",
+      "statuses": {
+        "unknown": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 32.88,
+        "p95": 36.54
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "photo_perspective",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 410.44,
+        "p95": 433.63
+      },
+      "latency_ms": {
+        "p50": 286.03,
+        "p95": 310.25
+      },
+      "preprocess": "perspective",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 123.27,
+        "p95": 124.3
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "photo_perspective_blur",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 450.87,
+        "p95": 458.44
+      },
+      "latency_ms": {
+        "p50": 316.9,
+        "p95": 330.24
+      },
+      "preprocess": "perspective",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 127.55,
+        "p95": 133.33
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "rotate_12",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 2.9231,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 324.5,
+        "p95": 335.22
+      },
+      "latency_ms": {
+        "p50": 284.05,
+        "p95": 294.79
+      },
+      "preprocess": "perspective",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 40.45,
+        "p95": 43.52
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "rotate_minus_18",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 1.4359,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 378.0,
+        "p95": 395.86
+      },
+      "latency_ms": {
+        "p50": 309.27,
+        "p95": 341.54
+      },
+      "preprocess": "perspective",
+      "statuses": {
+        "unknown": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 53.46,
+        "p95": 67.2
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "blur_medium",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 259.53,
+        "p95": 276.03
+      },
+      "latency_ms": {
+        "p50": 259.53,
+        "p95": 276.03
+      },
+      "preprocess": "raw",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 0.0,
+        "p95": 0.0
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "blur_mild",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 278.04,
+        "p95": 315.6
+      },
+      "latency_ms": {
+        "p50": 278.03,
+        "p95": 315.6
+      },
+      "preprocess": "raw",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 0.0,
+        "p95": 0.0
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "clear",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 269.82,
+        "p95": 322.5
+      },
+      "latency_ms": {
+        "p50": 269.82,
+        "p95": 322.5
+      },
+      "preprocess": "raw",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 0.0,
+        "p95": 0.0
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "combined",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 2.7436,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.6875,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.3333,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 307.03,
+        "p95": 327.24
+      },
+      "latency_ms": {
+        "p50": 307.03,
+        "p95": 327.23
+      },
+      "preprocess": "raw",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 0.0,
+        "p95": 0.0
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "low_light",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 276.61,
+        "p95": 300.82
+      },
+      "latency_ms": {
+        "p50": 276.61,
+        "p95": 300.81
+      },
+      "preprocess": "raw",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 0.0,
+        "p95": 0.0
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "perspective",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 288.52,
+        "p95": 322.96
+      },
+      "latency_ms": {
+        "p50": 288.52,
+        "p95": 322.95
+      },
+      "preprocess": "raw",
+      "statuses": {
+        "unknown": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 0.0,
+        "p95": 0.0
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "photo_perspective",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0,
+          "exact_count": 3,
+          "exact_rate": 1.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.25,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 336.83,
+        "p95": 341.3
+      },
+      "latency_ms": {
+        "p50": 336.83,
+        "p95": 341.3
+      },
+      "preprocess": "raw",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 0.0,
+        "p95": 0.0
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "photo_perspective_blur",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 0.0256,
+          "exact_count": 2,
+          "exact_rate": 0.6667,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 0.7292,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.3333,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 291.35,
+        "p95": 314.85
+      },
+      "latency_ms": {
+        "p50": 291.34,
+        "p95": 314.85
+      },
+      "preprocess": "raw",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 0.0,
+        "p95": 0.0
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "rotate_12",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 2.9231,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 287.78,
+        "p95": 336.58
+      },
+      "latency_ms": {
+        "p50": 287.78,
+        "p95": 336.58
+      },
+      "preprocess": "raw",
+      "statuses": {
+        "ktp": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 0.0,
+        "p95": 0.0
+      }
+    },
+    {
+      "cases": 3,
+      "condition": "rotate_minus_18",
+      "engine": "tesseract-ind",
+      "errors": 0,
+      "fields": {
+        "alamat": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "nama": {
+          "cer": 1.4359,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 1.0,
+          "samples": 3
+        },
+        "nik": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tanggal_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        },
+        "tempat_lahir": {
+          "cer": 1.0,
+          "exact_count": 0,
+          "exact_rate": 0.0,
+          "read_rate": 0.0,
+          "samples": 3
+        }
+      },
+      "inference_plus_variant_ms": {
+        "p50": 322.01,
+        "p95": 338.32
+      },
+      "latency_ms": {
+        "p50": 322.01,
+        "p95": 338.31
+      },
+      "preprocess": "raw",
+      "statuses": {
+        "unknown": 3
+      },
+      "variant_preprocessing_ms": {
+        "p50": 0.0,
+        "p95": 0.0
+      }
+    }
+  ],
+  "variants": [
+    "raw",
+    "perspective"
+  ]
+}

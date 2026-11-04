@@ -61,3 +61,7 @@ The **opt-in benchmark-only** `deskew` transform estimates horizontal text skew 
 ## From collected synthetic dataset to reproducible benchmark
 
 The optional collector produces a different ground-truth schema from the OCR benchmark runner. The new bridge generates **private**, identity-grouped development and holdout manifests from the reviewed synthetic `flat` split, optionally with blurred, rotated and perspective-distorted holdout images. No dataset files or labels are committed, and no production OCR model is changed. Read [collector-to-benchmark instructions](docs/collector-benchmark-bridge.md).
+
+## Optional full-card perspective correction (benchmark only)
+
+`app/benchmark/perspective.py` offers a conservative OpenCV quadrilateral crop + homography on photographs where all four document corners are visible. The `perspective` and `perspective_deskew` variants are **not** enabled in the production API. On 30 fictional typographic test images, local Tesseract `ind` NIK exact-match improved from 12/30 (raw) to 18/30 (perspective); this is **not** evidence about actual RapidOCR, `ktp.traineddata` or real KTP photographs. See [perspective evaluation](docs/perspective-evaluation.md) and its paired aggregate report. Cropped/missing text remains uncorrectable.
