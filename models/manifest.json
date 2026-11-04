@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "detector": {"name": null, "version": null, "weights": null, "sha256": null, "status": "not_configured"},
+  "ocr_engine": {"name": null, "version": null, "language": "id", "status": "not_configured"},
+  "dataset_revision": null,
+  "evaluation_report": null,
+  "approved_at": null
+}
