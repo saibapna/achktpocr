@@ -1,0 +1,1 @@
+"""aceh-ktp-ocr application package."""
