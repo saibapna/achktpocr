@@ -1,0 +1,1 @@
+"""Pluggable OCR engine adapters."""
