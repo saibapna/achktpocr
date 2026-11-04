@@ -1,0 +1,1 @@
+"""KTP field validation and consistency checks."""
