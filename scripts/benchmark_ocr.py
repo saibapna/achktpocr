@@ -32,7 +32,7 @@ def main() -> int:
         "--manifest", type=Path, help="Private JSONL manifest with images and verified GT"
     )
     cli.add_argument("--engines", default="rapidocr,tesseract-ktp", help="Comma-separated engines")
-    cli.add_argument("--variants", default="raw,gray", help="raw,gray,contrast,unsharp")
+    cli.add_argument("--variants", default="raw,gray", help="raw,gray,contrast,unsharp,deskew (requires OpenCV)")
     cli.add_argument("--tessdata-dir", type=Path, help="Directory containing ktp.traineddata")
     cli.add_argument("--seed", type=int, default=20261105)
     cli.add_argument("--output", type=Path, default=Path("reports/ocr_benchmark.json"))

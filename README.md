@@ -53,3 +53,7 @@ Read docs/docker-deployment.md for operations and security.
 ## Benchmark RapidOCR vs Tesseract model KTP
 
 The separate CPU-only benchmark compares RapidOCR and Tesseract with `ktp.traineddata` on identical synthetic or private, authorized held-out images. The custom Tesseract model is **not** included in production images and must pass model licensing/provenance review. See [benchmark instructions](docs/ocr-benchmark.md). Do not enable fallback or preprocessing without validated improvements on held-out KTPs.
+
+## Experimental photo deskew benchmark
+
+The **opt-in benchmark-only** `deskew` transform estimates horizontal text skew (up to ±24°) and applies a rotation only when row alignment improves sufficiently. On 24 **fictional synthetic cards** with local Tesseract `ind`, NIK exact-match increased from 12/24 to 21/24, with no regressions on clear fixtures. It **did not** fix perspective distortion. The transform adds CPU cost, and this is **not evidence** of RapidOCR or real-KTP accuracy; no production API processing is changed. See [evaluation and acceptance gates](docs/deskew-evaluation.md).

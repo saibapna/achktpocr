@@ -19,7 +19,7 @@ After checking the source/model rights and security of the artifact:
     python scripts/fetch_taqiin_ktp.py --acknowledge-license-review
     python scripts/benchmark_ocr.py --synthetic \
       --tessdata-dir models/benchmark --engines rapidocr,tesseract-ktp \
-      --variants raw,gray,contrast,unsharp \
+      --variants raw,gray,contrast,unsharp,deskew \
       --output reports/synthetic_ocr.json
 
 This generates 24 **fictional, typographic** fixtures (3 synthetic identities × 8 conditions) in a temporary directory. Conditions include blur, ± rotation, perspective, low light and combined distortions. Reports contain aggregate outcomes only and **cannot** establish accuracy on real KTP photos.
@@ -39,7 +39,7 @@ For an authorized private held-out collection, mount the private dataset to `/pr
       -v /secure/private-ktp:/private:ro \
       benchmark --manifest /private/manifest.jsonl \
       --tessdata-dir /models/benchmark --engines rapidocr,tesseract-ktp \
-      --variants raw,gray,contrast,unsharp --output /reports/private_summary.json
+      --variants raw,gray,contrast,unsharp,deskew --output /reports/private_summary.json
 
 Manifest format (JSONL, one object per case; **never commit private files**):
 
@@ -49,8 +49,8 @@ Manifest format (JSONL, one object per case; **never commit private files**):
 
 ## Methodology and decision gate
 
-- Use exactly the same image bytes, engine configuration, parser and held-out samples across comparisons. The `raw`, `gray`, `contrast` and `unsharp` ablations are each measured independently.
-- Measurements: NIK 16-digit exact match, exact match/read rate and character error rate (CER) for name/date/place/address, parse coverage, engine errors, P50/P95 inference time. No raw OCR text, paths, NIK, GT labels or images in output.
+- Use exactly the same image bytes, engine configuration, parser and held-out samples across comparisons. The `raw`, `gray`, `contrast`, `unsharp`, and optional `deskew` ablations are each measured independently. `deskew` needs OpenCV and is not enabled in the production API.
+- Measurements: NIK 16-digit exact match, exact match/read rate and character error rate (CER) for name/date/place/address, parse coverage, engine errors, paired NIK outcomes, P50/P95 inference time and variant preprocessing CPU time. No raw OCR text, paths, NIK, GT labels or images in output.
 - **Never** accept an improvement on only the synthetic set. Require at least 100 independent, properly licensed/authorized held-out real documents across photographed conditions, enough per-severity samples, and estimates of uncertainty before promotion.
 - Candidate preprocessing/fallback must improve NIK exact-match on the hard subset **without material losses on clear samples**, excess false positive `success`, or unacceptable CPU/RAM/P95 cost. Include per-field metrics, not only mean confidence. Compare paired outcomes per document to avoid bias.
 - User-visible inference never replaces a missing NIK with inferred digits; review/re-photograph when uncertain.
@@ -59,3 +59,7 @@ Manifest format (JSONL, one object per case; **never commit private files**):
 ## Failure modes
 
 The runner fails closed if either engine/model is absent or crashes (unless explicitly using `--allow-errors`, which counts failures). `health/ready` dependency availability is **not** a successful OCR inference test. A Docker image build is likewise **not** benchmark evidence.
+
+## Auto-deskew candidate
+
+For the reproducible deskew trial and its real-data acceptance gate, see [deskew-evaluation.md](deskew-evaluation.md). The benchmark-only deskew variant is not automatically promoted to Docker production, even if it improves synthetic results.

@@ -19,7 +19,7 @@ from app.extraction.ktp_parser import parse_ktp_lines
 from app.preprocessing.image_loader import prepare_image
 
 FIELDS = ("nik", "nama", "tanggal_lahir", "tempat_lahir", "alamat")
-PREPROCESS = ("raw", "gray", "contrast", "unsharp")
+PREPROCESS = ("raw", "gray", "contrast", "unsharp", "deskew")
 
 
 def _normalized(value: str | None) -> str:
@@ -55,6 +55,10 @@ def normalize_image(data: bytes, name: str) -> bytes:
         return data
     if name not in PREPROCESS:
         raise ValueError("Unsupported preprocessing variant")
+    if name == "deskew":
+        from app.benchmark.geometry import deskew_png
+
+        return deskew_png(data)
     import io
 
     with Image.open(io.BytesIO(data)) as opened:
@@ -99,6 +103,7 @@ def build_engines(names: list[str], tessdata_dir: Path | None) -> dict[str, Benc
 class Counter:
     fields: dict[str, dict[str, int]]
     timings_ms: list[float]
+    variant_timings_ms: list[float]
     statuses: dict[str, int]
     errors: int
     total: int
@@ -106,11 +111,19 @@ class Counter:
     @classmethod
     def create(cls) -> "Counter":
         return cls(defaultdict(lambda: {"gt": 0, "read": 0, "correct": 0, "edit": 0, "chars": 0}),
-                   [], defaultdict(int), 0, 0)
+                   [], [], defaultdict(int), 0, 0)
 
-    def add(self, truth: dict[str, str], fields: object, state: str, millis: float) -> None:
+    def add(
+        self,
+        truth: dict[str, str],
+        fields: object,
+        state: str,
+        millis: float,
+        variant_ms: float = 0.0,
+    ) -> None:
         self.total += 1
         self.timings_ms.append(millis)
+        self.variant_timings_ms.append(variant_ms)
         self.statuses[state] += 1
         for name in FIELDS:
             if name not in truth:
@@ -126,10 +139,11 @@ class Counter:
             ctr["edit"] += _distance(predicted, gt)
             ctr["chars"] += len(gt)
 
-    def add_error(self, truth: dict[str, str], elapsed_ms: float) -> None:
+    def add_error(self, truth: dict[str, str], elapsed_ms: float, variant_ms: float = 0.0) -> None:
         self.errors += 1
         self.total += 1
         self.timings_ms.append(elapsed_ms)
+        self.variant_timings_ms.append(variant_ms)
         self.statuses["error"] += 1
         for name in FIELDS:
             if name in truth and _normalized(truth[name]):
@@ -156,6 +170,44 @@ class Counter:
             "statuses": dict(self.statuses),
             "fields": fields,
             "latency_ms": {"p50": _pct(self.timings_ms, 50), "p95": _pct(self.timings_ms, 95)},
+            # Variant time is tracked separately to avoid hiding deskew CPU cost.
+            # The common decode/prepare_image stage is excluded for both variants.
+            "variant_preprocessing_ms": {
+                "p50": _pct(self.variant_timings_ms, 50),
+                "p95": _pct(self.variant_timings_ms, 95),
+            },
+            "inference_plus_variant_ms": {
+                "p50": _pct([x + y for x, y in zip(self.timings_ms, self.variant_timings_ms)], 50),
+                "p95": _pct([x + y for x, y in zip(self.timings_ms, self.variant_timings_ms)], 95),
+            },
+        }
+
+
+@dataclass
+class PairedCounts:
+    """Only publish outcome totals, never per-document predictions or identifiers."""
+
+    both_correct: int = 0
+    baseline_only: int = 0
+    candidate_only: int = 0
+    both_wrong: int = 0
+
+    def add(self, baseline: bool, candidate: bool) -> None:
+        if baseline and candidate:
+            self.both_correct += 1
+        elif baseline:
+            self.baseline_only += 1
+        elif candidate:
+            self.candidate_only += 1
+        else:
+            self.both_wrong += 1
+
+    def summary(self) -> dict[str, int]:
+        return {
+            "both_correct": self.both_correct,
+            "baseline_only": self.baseline_only,
+            "candidate_only": self.candidate_only,
+            "both_wrong": self.both_wrong,
         }
 
 
@@ -176,6 +228,9 @@ def run_comparison(
     if not cases:
         raise ValueError("No benchmark cases supplied")
     counters: dict[tuple[str, str, str], Counter] = defaultdict(Counter.create)
+    overall_counters: dict[tuple[str, str], Counter] = defaultdict(Counter.create)
+    variant_pair_counts: dict[tuple[str, str, str], PairedCounts] = defaultdict(PairedCounts)
+    engine_pair_counts: dict[tuple[str, str, str], PairedCounts] = defaultdict(PairedCounts)
     model_metadata = {
         name: {"model_sha256": getattr(engine, "model_sha256", None)}
         for name, engine in engines.items()
@@ -183,10 +238,14 @@ def run_comparison(
     for case in cases:
         original = case.image.read_bytes()
         prepared = prepare_image(original, max_side=2500, max_dimension=8000, max_pixels=16_000_000)
+        nik_correct: dict[tuple[str, str], bool] = {}
         for variant in variants:
+            variant_start = time.perf_counter()
             data = normalize_image(prepared, variant)
+            variant_ms = (time.perf_counter() - variant_start) * 1000
             for name, engine in engines.items():
                 ctr = counters[(name, variant, case.condition)]
+                overall_ctr = overall_counters[(name, variant)]
                 start = time.perf_counter()
                 try:
                     lines = engine.read(data)
@@ -194,7 +253,9 @@ def run_comparison(
                 except Exception:
                     # Never include raw errors/filenames, which may contain personal data.
                     elapsed = (time.perf_counter() - start) * 1000
-                    ctr.add_error(case.truth, elapsed)
+                    for counter in (ctr, overall_ctr):
+                        counter.add_error(case.truth, elapsed, variant_ms)
+                    nik_correct[(name, variant)] = False
                     if not allow_errors:
                         raise RuntimeError(
                             f"OCR engine {name} failed; aborted to avoid misleading metrics"
@@ -202,7 +263,37 @@ def run_comparison(
                     continue
                 elapsed = (time.perf_counter() - start) * 1000
                 status = "ktp" if kind == "ktp_el" else "unknown"
-                ctr.add(case.truth, fields, status, elapsed)
+                for counter in (ctr, overall_ctr):
+                    counter.add(case.truth, fields, status, elapsed, variant_ms)
+                gt_nik = _normalized(case.truth.get("nik"))
+                nik_correct[(name, variant)] = bool(gt_nik) and (
+                    _normalized(fields.nik.value) == gt_nik
+                )
+
+        # Compare identical cases, rather than unrelated aggregate percentages.
+        # Never serialize any case-level outcome or truth from this local dict.
+        if _normalized(case.truth.get("nik")):
+            for engine in engines:
+                if "raw" in variants:
+                    for variant in variants:
+                        if variant != "raw":
+                            variant_pair_counts[(engine, variant, case.condition)].add(
+                                nik_correct[(engine, "raw")], nik_correct[(engine, variant)]
+                            )
+                            variant_pair_counts[(engine, variant, "all")].add(
+                                nik_correct[(engine, "raw")], nik_correct[(engine, variant)]
+                            )
+            engine_names = list(engines)
+            if len(engine_names) >= 2:
+                primary = engine_names[0]
+                for candidate in engine_names[1:]:
+                    for variant in variants:
+                        engine_pair_counts[(candidate, variant, case.condition)].add(
+                            nik_correct[(primary, variant)], nik_correct[(candidate, variant)]
+                        )
+                        engine_pair_counts[(candidate, variant, "all")].add(
+                            nik_correct[(primary, variant)], nik_correct[(candidate, variant)]
+                        )
 
     summary = []
     for (name, variant, condition), ctr in sorted(counters.items()):
@@ -217,6 +308,20 @@ def run_comparison(
         "engines": model_metadata,
         "variants": variants,
         "summary": summary,
+        "overall": [
+            {"engine": name, "preprocess": variant, **counter.summary()}
+            for (name, variant), counter in sorted(overall_counters.items())
+        ],
+        "paired_nik_variants": [
+            {"engine": name, "baseline": "raw", "candidate": variant,
+             "condition": condition, **counts.summary()}
+            for (name, variant, condition), counts in sorted(variant_pair_counts.items())
+        ],
+        "paired_nik_engines": [
+            {"baseline_engine": next(iter(engines)), "candidate_engine": candidate,
+             "preprocess": variant, "condition": condition, **counts.summary()}
+            for (candidate, variant, condition), counts in sorted(engine_pair_counts.items())
+        ],
         "promotion_eligible": False,
         "reason": (
             "Candidate needs a sufficiently sized, authorized real held-out dataset, "
