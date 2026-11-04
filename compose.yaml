@@ -27,3 +27,32 @@ services:
     mem_limit: 2g
     cpus: 2.0
     restart: unless-stopped
+
+  # Opt-in collector; not started with docker compose up -d.
+  dataset-collector:
+    profiles: ["datasets"]
+    build:
+      context: ./datasets/collector
+      dockerfile: Dockerfile
+    image: achktpocr-dataset-collector:local
+    user: "${DATASET_UID:-1000}:${DATASET_GID:-1000}"
+    environment:
+      KTP_DATA_DIR: /data
+      HF_TOKEN: ${HF_TOKEN:-}
+      ROBOFLOW_API_KEY: ${ROBOFLOW_API_KEY:-}
+      HOME: /data
+      HF_HOME: /data/.hf_cache
+      XDG_CACHE_HOME: /data/.cache
+      PYTHONDONTWRITEBYTECODE: "1"
+    volumes:
+      - ./datasets/raw:/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,nosuid,nodev
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 128
+    mem_limit: 4g
+    restart: "no"

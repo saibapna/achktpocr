@@ -8,6 +8,7 @@ Standalone Indonesian KTP-el OCR API using FastAPI + RapidOCR + ONNX Runtime CPU
 
     git clone https://github.com/saibapna/achktpocr.git
     cd achktpocr
+    git switch feat/rapidocr-docker-mvp
     cp .env.example .env
     # Edit .env: replace APP_API_KEY with a long random secret
     docker compose up -d --build
@@ -17,6 +18,20 @@ Standalone Indonesian KTP-el OCR API using FastAPI + RapidOCR + ONNX Runtime CPU
     curl -H "X-API-Key: $APP_API_KEY" -F "file=@synthetic-ktp.png" http://127.0.0.1:8000/v1/ocr/ktp
 
 For local development: pip install -e '.[dev,ocr]' && pytest -q.
+
+## Optional dataset collector
+
+The dataset collector runs separately from the OCR API using an opt-in Docker Compose profile. It downloads synthetic KTP images and labels for offline testing; no dataset files are bundled with the public repository or the production API image.
+
+```sh
+mkdir -p datasets/raw
+docker compose --profile datasets run --build --rm dataset-collector sources
+docker compose --profile datasets run --rm dataset-collector hf --config flat --limit 100
+# Whole synthetic flat split (large download):
+docker compose --profile datasets run --rm dataset-collector hf --config flat --limit 0
+```
+
+Files are stored locally at `datasets/raw/`, excluded from Git. Real or uncertain-privacy collections require separate permission and are never downloaded by default. See [collector instructions](datasets/collector/README.md) and [dataset policy](datasets/README.md).
 
 ## API
 

@@ -33,3 +33,4 @@ models/**/*.safetensors
 .DS_Store
 .idea/
 .vscode/
+datasets/collector/data/**
