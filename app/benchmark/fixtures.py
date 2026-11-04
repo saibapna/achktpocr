@@ -73,6 +73,37 @@ def _perspective(image: Image.Image) -> Image.Image:
                            fillcolor="white")
 
 
+
+def make_perspective_photo(image: Image.Image, *, blur_radius: float = 0.0) -> Image.Image:
+    """Render a fictional complete card on a contrasting background.
+
+    Unlike the legacy `perspective` case, all four document corners and text
+    remain inside the photograph, so rectification has information to recover.
+    """
+    import cv2
+    import numpy as np
+
+    card = np.asarray(image.convert("RGB"))
+    h, w = card.shape[:2]
+    corners = np.float32(((150, 130), (1600, 320), (1400, 1190), (210, 995)))
+    matrix = cv2.getPerspectiveTransform(
+        np.float32(((0, 0), (w - 1, 0), (w - 1, h - 1), (0, h - 1))), corners
+    )
+    shape = (1350, 1800)
+    canvas = np.full((shape[0], shape[1], 3), 90, dtype=np.uint8)
+    warped = cv2.warpPerspective(card, matrix, (shape[1], shape[0]), flags=cv2.INTER_CUBIC)
+    mask = cv2.warpPerspective(
+        np.full((h, w), 255, dtype=np.uint8), matrix,
+        (shape[1], shape[0]), flags=cv2.INTER_NEAREST,
+    )
+    canvas[mask > 0] = warped[mask > 0]
+    cv2.polylines(canvas, [corners.astype(np.int32)], True, (25, 25, 25), 7)
+    photo = Image.fromarray(canvas)
+    if blur_radius:
+        return photo.filter(ImageFilter.GaussianBlur(radius=blur_radius))
+    return photo
+
+
 def distort(image: Image.Image, condition: str, seed: int) -> Image.Image:
     if condition == "clear":
         return image.copy()
@@ -86,6 +117,10 @@ def distort(image: Image.Image, condition: str, seed: int) -> Image.Image:
         return image.rotate(-18, expand=True, resample=Image.Resampling.BICUBIC, fillcolor="white")
     if condition == "perspective":
         return _perspective(image)
+    if condition == "photo_perspective":
+        return make_perspective_photo(image)
+    if condition == "photo_perspective_blur":
+        return make_perspective_photo(image, blur_radius=1.4)
     if condition == "low_light":
         return ImageEnhance.Contrast(ImageEnhance.Brightness(image).enhance(0.48)).enhance(0.55)
     if condition == "combined":
@@ -96,7 +131,7 @@ def distort(image: Image.Image, condition: str, seed: int) -> Image.Image:
 
 
 CONDITIONS = ("clear", "blur_mild", "blur_medium", "rotate_12", "rotate_minus_18",
-              "perspective", "low_light", "combined")
+              "perspective", "photo_perspective", "photo_perspective_blur", "low_light", "combined")
 
 
 def generate_synthetic(directory: Path, seed: int = 20261105) -> list[Fixture]:

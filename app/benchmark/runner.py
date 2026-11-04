@@ -19,7 +19,7 @@ from app.extraction.ktp_parser import parse_ktp_lines
 from app.preprocessing.image_loader import prepare_image
 
 FIELDS = ("nik", "nama", "tanggal_lahir", "tempat_lahir", "alamat")
-PREPROCESS = ("raw", "gray", "contrast", "unsharp", "deskew")
+PREPROCESS = ("raw", "gray", "contrast", "unsharp", "deskew", "perspective", "perspective_deskew")
 
 
 def _normalized(value: str | None) -> str:
@@ -59,6 +59,15 @@ def normalize_image(data: bytes, name: str) -> bytes:
         from app.benchmark.geometry import deskew_png
 
         return deskew_png(data)
+    if name in ("perspective", "perspective_deskew"):
+        from app.benchmark.perspective import perspective_png
+
+        corrected = perspective_png(data)
+        if name == "perspective_deskew":
+            from app.benchmark.geometry import deskew_png
+
+            return deskew_png(corrected)
+        return corrected
     import io
 
     with Image.open(io.BytesIO(data)) as opened:
